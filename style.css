@@ -1,0 +1,125 @@
+/* ------------------------------ GENERAL RESET ------------------------------ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Aspekta', sans-serif;
+  background-image: url("cueva con.png");
+  background-size: initial;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #e4ebdb;
+}
+
+/* NAVIGATION */
+nav#desktop-nav {
+  border: 1px solid #dee6d5;
+  height: 6.2vh;
+  padding: 0.5rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 100;
+}
+.nav-links { display: flex; 
+    list-style: none;
+     gap: 2rem; 
+     font-size: x-large; }
+.nav-links a { color:#e4ebdb; 
+    text-decoration: underline; 
+    transition: all 300ms ease; }
+.nav-links a:hover { color: greenyellow; }
+
+.logo { font-family: 'Aspekta', sans-serif; font-size: 4rem; color: #e4ebdb; }
+
+#costume-design {
+    margin-top: 6vh; /* 10% of viewport height, adjusts on screen size */
+}
+/* SIDELINES */
+.vertical-line { position: fixed; 
+    top:0; 
+    bottom:0; 
+    width:1px; 
+    background:#e4ebdb; z-index:1000; }
+.vertical-line.left { left:0.5%; }
+.vertical-line.right { right:0.5%; }
+
+/* GRID */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+  margin: 2rem auto;
+  max-width: 1500px;
+}
+.col { border:1px solid; 
+    position:relative; 
+    width:100%; 
+    aspect-ratio:1/1; 
+    overflow:hidden; cursor:pointer; }
+.project-button {
+  position:absolute; 
+  top:10px; 
+  left:50%; 
+  transform:translateX(-50%);
+  padding:5px 10px; 
+  background:transparent; 
+  color:#e4ebdb; 
+  text-decoration:underline; 
+  font-size:1rem; z-index:10;
+}
+.project-button:hover { color:yellowgreen; }
+
+/* SLIDER */
+.slider { position:absolute; 
+    top:0; 
+    left:0; 
+    width:100%; 
+    height:100%; 
+    display:none; 
+    z-index:1; 
+    overflow:hidden; }
+.col:hover .slider { display:block; }
+.slide-track { 
+    display:flex; 
+    width:500%; 
+    height:100%; 
+    animation:scroll 20s linear infinite; }
+.slide { flex:0 0 20%; height:100%; }
+.slide img { width:100%; 
+    height:100%; 
+    object-fit:cover; }
+
+    
+@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-80%); } }
+
+/* HAMBURGER */
+.hamburger { display:none; 
+    flex-direction: column; 
+    cursor:pointer; gap:5px; }
+.hamburger div { width:25px; 
+    height:3px; 
+    background:#e4ebdb; 
+    transition:all 0.3s ease; }
+.hamburger.active .bar1 {
+     transform: rotate(45deg) translate(5px,5px); }
+.hamburger.active .bar2 { 
+    opacity:0; }
+.hamburger.active .bar3 {
+     transform: rotate(-45deg) translate(5px,-5px); }
+
+/* RESPONSIVE GRID + NAV */
+@media(max-width:1024px) { .grid-container{grid-template-columns:repeat(6,1fr);} }
+@media(max-width:768px){
+  .hamburger{display:flex;}
+  .nav-links{display:none;
+    position:absolute; top:100%; 
+    right:1.5rem; 
+    flex-direction:column; 
+    background:rgba(0,0,0,0.9); 
+    padding:1rem; border-radius:4px; gap:1rem;}
+  .nav-links.active{display:flex;}
+  .grid-container{grid-template-columns:repeat(4,1fr);}
+}
+@media(max-width:480px){ .grid-container{grid-template-columns:repeat(2,1fr);} }

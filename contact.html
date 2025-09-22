@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact Info</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+/* Typography */
+h1 { 
+  font-size: 32px; 
+  font-weight: bold; 
+  margin-bottom: 20px; 
+  font-style: italic; 
+}
+h2 { 
+  font-size: 24px; 
+  font-weight: 600; 
+  margin-bottom: 15px; 
+}
+p { 
+  font-size: 16px; 
+  line-height: 1.8; 
+  margin-bottom: 20px; 
+}
+
+/* Body */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Aspekta', sans-serif;
+  background: url('cueva con.png') no-repeat center center fixed;
+  background-size: cover;
+  color: #e4ebdb;
+  overflow-x: visible;
+}
+
+/* Navigation */
+nav#desktop-nav {
+  display: flex;
+  align-items: center;      
+  justify-content: space-between; 
+  padding: 0.5rem 1.5rem;
+  height: 40px;             
+  border-bottom: 1px solid #dee6d5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: transparent;
+  z-index: 100;
+}
+
+.nav-links { 
+  list-style: none; 
+  display: flex; 
+  gap: 2rem; 
+  margin: 0; 
+  padding: 0; 
+  font-size: 1.5rem; 
+}
+
+.nav-links a { 
+  text-decoration: underline; 
+  color: #e4ebdb; 
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: greenyellow; }
+
+.logo {
+  font-family: 'Aspekta', sans-serif;
+  font-size: 3rem;
+  color: #e4ebdb;
+  cursor: inherit;
+  margin-bottom: 6px;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background-color: #e4ebdb;
+  transition: all 0.3s ease;
+}
+
+/* Layout */
+main {
+  padding-top: 60px; /* space for fixed nav */
+}
+
+/* Contact image section */
+.contact-image {
+  position: relative; /* needed for absolute overlay */
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.contact-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* keeps aspect ratio */
+}
+
+/* Buttons overlay */
+.contact-info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.button-container {
+  background: rgba(248, 248, 247, 0.95); /* white with slight transparency */
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.email-btn,
+.linkedin-btn {
+  display: block;
+  padding: 8px 12px;
+  border: 1px solid #31332f;
+  color: #31332f;
+  text-decoration: none;
+  font-weight: bold;
+  width: 100%; /* full width inside container */
+  text-align: center;
+  transition: 0.3s;
+  border-radius: 4px;
+}
+
+.email-btn:hover,
+.linkedin-btn:hover {
+  background: greenyellow;
+  color: black;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .nav-links {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: rgba(0,0,0,0.8);
+    flex-direction: column;
+    width: 200px;
+    padding: 20px;
+    display: none;
+    gap: 1rem;
+    border-radius: 0 0 0 8px;
+  }
+  .nav-links.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .logo {
+    font-size: 2.2rem;
+  }
+
+  .contact-info {
+    width: 90%;
+  }
+
+  .button-container {
+    padding: 15px;
+    gap: 10px;
+  }
+
+  .email-btn,
+  .linkedin-btn {
+    padding: 10px 0;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-info {
+    width: 95%;
+    top: 45%;
+  }
+
+  .button-container {
+    padding: 12px;
+  }
+
+  .email-btn,
+  .linkedin-btn {
+    font-size: 0.95rem;
+  }
+}
+</style>
+</head>
+<body>
+<nav id="desktop-nav">
+  <div class="logo">Let's get in touch!</div>
+  <div class="hamburger" id="hamburger">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+  <!-- Contact Image -->
+  <section class="contact-image">
+    <img src="littledrawings.jpg" alt="Mikaela Martinez" />
+
+    <!-- Buttons overlay inside white container -->
+    <div class="contact-info">
+      <div class="button-container">
+        <a class="email-btn">+1 (771)-201-7170 ✮⋆˙</a>
+        <a href="mailto:mikaelamtzparente@gmail.com" class="email-btn">✮⋆˙ mikaelamtzparente@gmail.com</a>
+        <a href="https://www.linkedin.com/in/mikaela-martinez-parente-6484a31a2/" class="linkedin-btn">LinkedIn ✮⋆˙</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+// Hamburger toggle
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('nav-links');
+
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+});
+</script>
+
+</body>
+</html>

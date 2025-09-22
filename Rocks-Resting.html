@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Costume Design</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+/* Typography */
+h1 { 
+  font-size: 32px; 
+  font-weight: bold; 
+  margin-bottom: 20px; 
+  font-style: italic; 
+}
+h2 { 
+  font-size: 24px; 
+  font-weight: 600; 
+  margin-bottom: 15px; 
+}
+p { 
+  font-size: 16px; 
+  line-height: 1.8; 
+  margin-bottom: 20px; 
+}
+
+/* Body */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Aspekta', sans-serif;
+  background: url('cueva con.png') no-repeat center center fixed;
+  background-size: cover;
+  color: #e4ebdb;
+  overflow-x: visible;
+}
+
+/* Navigation */
+nav#desktop-nav {
+  display: flex;
+  align-items: center;      
+  justify-content: space-between; 
+  padding: 0.5rem 1.5rem;
+  height: 40px;             
+  border-bottom: 1px solid #dee6d5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: transparent;
+  z-index: 100;
+}
+.nav-links { 
+  list-style: none; 
+  display: flex; 
+  gap: 2rem; 
+  margin: 0; 
+  padding: 0; 
+  font-size: 1.5rem; 
+}
+.nav-links a { 
+  text-decoration: underline; 
+  color: #e4ebdb; 
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: greenyellow; }
+
+.logo {
+  font-family: 'Aspekta', sans-serif;
+  font-size: 3rem;
+  color: #e4ebdb;
+  cursor: inherit;
+  margin-bottom: 6px;
+}
+
+/* Layout */
+main {
+  position: relative; /* for the vertical line */
+  padding-top: 60px; /* space for fixed nav */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Continuous vertical line */
+main::before {
+  content: '';
+  position: absolute;
+  top: 40px;
+  bottom: 240px;
+  left: calc(60% - 145px);  /* shifted 40px left */
+  width: 1px;
+  background: #e4ebdb;
+  opacity: 0.5;
+  z-index: 0; /* behind content */
+}
+
+.project-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1200px;
+  gap: 0px;
+  padding: 24px 20px;
+  margin: 0;
+  position: relative;
+}
+
+.project-left { flex: 0 0 60%; position: relative; }
+.project-right { flex: 0 0 50%; position: relative; padding-left: 80px; }
+
+/* Image descriptions (right side) */
+.project-text {
+  margin-top: 20px;
+  padding-left: 50px;
+  list-style: none;
+}
+.project-text li {
+  margin-bottom: 18px;
+  font-size: 15px;
+  line-height: 1.2;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+.project-text li.active-description { opacity: 1; }
+.project-text em.active-caption {
+  color: greenyellow;
+  opacity: 0.7;
+  font-weight: bold;
+}
+.project-text em {
+  font-style: italic;
+  font-size: 17px;
+  font-weight: bold;
+  margin-right: 6px;
+  color: #bdc3b5;
+  cursor: pointer;
+}
+.project-text, .project-text li, .project-text em {
+  font-family: 'Aspekta' !important;
+}
+
+.divider {
+  border: none;
+  border-top: 2px solid #e4ebdb;
+  opacity: 0.4;
+  margin: 40px 0;
+  width: 100%;        /* force full viewport width */
+  position: relative;  /* stays in normal flow */
+  left: 0;             /* align to the left edge */
+}
+
+/* Slideshow */
+.slideshow-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  overflow: hidden;
+}
+.slides img {
+  max-height: 550px;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+.slides { display: block; position: relative; }
+
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #e4ebdb;
+  font-size: 1rem;
+  padding: 8px 12px;
+  cursor: pointer;
+  user-select: none;
+  z-index: 2;
+  background: rgba(0,0,0,0.2);
+  border-radius: 50%;
+  transition: background 0.3s, color 0.3s;
+}
+.prev:hover, .next:hover { color: greenyellow; background: rgba(0,0,0,0.4); }
+.prev { left: 10px; }
+.next { right: 10px; }
+
+.dot-container { text-align: center; margin-top: 10px; }
+.dot {
+  cursor: pointer;
+  height: 12px;
+  width: 12px;
+  margin: 0 4px;
+  background: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: transform 0.3s, background 0.3s;
+}
+.dot:hover { transform: scale(1.2); }
+.active-dot { background: greenyellow; }
+
+/* Buttons */
+.back-button, .next-project-btn, .previous-project-btn {
+  display: inline-block;
+  margin: 20px auto;
+  padding: 5px 10px;
+  border: 1px solid #e4ebdb;
+  color: #e4ebdb;
+  text-decoration: none;
+  transition: 0.3s;
+  text-align: center;
+  width: fit-content;
+}
+.back-button:hover, .next-project-btn:hover, .previous-project-btn:hover {
+  background: greenyellow;
+  color: black;
+}
+
+/* Vertical lines on edges */
+.vertical-line.left { left: 0.5%; position: fixed; top: 0; bottom: 0; width: 1px; background: #e4ebdb; }
+.vertical-line.right { right: 0.5%; position: fixed; top: 0; bottom: 0; width: 1px; background: #e4ebdb; }
+
+/* Responsive */
+@media screen and (max-width: 900px) {
+  .project-container { flex-direction: column-reverse; gap: 20px; }
+  .project-left, .project-right { max-width: 100%; flex: 1 1 100%; }
+  main::before { display: none; } /* hide line on mobile */
+}
+</style>
+</head>
+<body>
+<nav id="desktop-nav">
+  <div class="logo">Costume Design</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+  <!-- Project 1 -->
+  <section class="project-container">
+    <div class="project-left">
+      <div class="slideshow-container">
+        <div class="slides"><img src="RR/rr5.png" alt="rr cover"></div>
+        <div class="slides"><img src="RR/rr4.png" alt="rr4 project"></div>
+        <div class="slides"><img src="RR/rr2.jpg" alt="rr5 project"></div>
+        <div class="slides"><img src="RR/rr7.png" alt="rr7 project"></div>
+        <a class="prev">. ݁₊⊹. ݁ </a>
+        <a class="next"> ݁ .⊹₊ ݁.</a>
+      </div>
+      <div class="dot-container">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </div>
+    </div>
+    <div class="project-right">
+      <h1>Rocks Resting</h1>
+      <h2>Costumes for Michiel Teeuw's performance, (2022)</h2>
+      <p>This performance placed three large rocks in the city center as a temporary resting space for five participants. Amid the bustling, snowy streets, they cared for each other and rested, creating an oasis of silence while confronting exhaustion from forces like ableism, xenophobia, illness, and work precarity. Presented by Kunstpunt Groningen and Eurosonic Noorderslag.</p>
+      <hr class="divider">
+      <ul class="project-text">
+        <li><em>Image 1:</em> Official poster for *Rocks Resting*. (Edited by Michiel Teeuwu)</li>
+        <li><em>Image 2:</em> Performer resting on one of the rocks during the performance.</li>
+        <li><em>Image 3:</em> Process shot highlighting the glowing elements of the two-piece costume.</li>
+        <li><em>Image 4:</em> Close-up of the performer’s shoes, showing snow and winter conditions.</li>
+      </ul>
+    </div>
+  </section>
+  <hr class="divider">  <!-- this will now stretch across the page -->
+
+  <!-- Project 2: Grounding Strategies -->
+  <section id="grounding-strategies" class="project-container">
+    <div class="project-left">
+      <div class="slideshow-container">
+        <div class="slides"><img src="Rocks-Resting2/michiel1.JPG" alt="rr cover"></div>
+        <div class="slides"><img src="Rocks-Resting2/rr2-3.jpg" alt="rr4 project"></div>
+        <a class="prev">. ݁₊⊹. ݁ </a>
+        <a class="next"> ݁ .⊹₊ ݁.</a>
+      </div>
+      <div class="dot-container">
+        <span class="dot"></span><span class="dot"></span>
+      </div>
+    </div>
+    <div class="project-right">
+      <h1>Grounding Strategies</h1>
+      <h2>Costumes for Michiel Teeuw's performance, (2024)</h2>
+      <p>Grounding Strategies is an artistic and embodied research project exploring exhaustion, energy, extraction, and care.</p>
+      <hr class="divider">
+      <ul class="project-text">
+        <li><em>Image 1:</em> Performance shot showing the artist wearing a white cotton top hand-dyed with turmeric.</li>
+        <li><em>Image 2:</em> Process image showing the top being woven before dyeing.</li>
+      </ul>
+    </div>
+  </section>
+
+  <a href="division-of-labour.html" class="next-project-btn">Next Project ✮⋆˙</a>
+  <a href="how-to-make-it.html" class="previous-project-btn">✮⋆˙Previous Project </a>
+  <a href="index.html" class="back-button">← Back to Home</a>
+</main>
+
+<div class="vertical-line left"></div>
+<div class="vertical-line right"></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const projects = document.querySelectorAll(".project-container");
+
+  projects.forEach(project => {
+    let slideIndex = 1;
+    const slides = project.querySelectorAll(".slides");
+    const dots = project.querySelectorAll(".dot");
+    const captions = project.querySelectorAll(".project-text em");
+    const descriptions = project.querySelectorAll(".project-text li");
+
+    function showSlide(n) {
+      if (n > slides.length) slideIndex = 1;
+      if (n < 1) slideIndex = slides.length;
+
+      slides.forEach(slide => slide.style.display = "none");
+      slides[slideIndex - 1].style.display = "block";
+
+      dots.forEach(dot => dot.classList.remove("active-dot"));
+      if (dots[slideIndex - 1]) dots[slideIndex - 1].classList.add("active-dot");
+
+      captions.forEach(c => c.classList.remove("active-caption"));
+      if (captions[slideIndex - 1]) captions[slideIndex - 1].classList.add("active-caption");
+
+      descriptions.forEach(desc => desc.classList.remove("active-description"));
+      if (descriptions[slideIndex - 1]) descriptions[slideIndex - 1].classList.add("active-description");
+    }
+
+    function plusSlides(n) { showSlide(slideIndex += n); }
+    function currentSlide(n) { showSlide(slideIndex = n); }
+
+    const prev = project.querySelector(".prev");
+    const next = project.querySelector(".next");
+    if (prev) prev.addEventListener("click", () => plusSlides(-1));
+    if (next) next.addEventListener("click", () => plusSlides(1));
+
+    dots.forEach((dot, i) => dot.addEventListener("click", () => currentSlide(i + 1)));
+    captions.forEach((c, i) => c.addEventListener("click", () => currentSlide(i + 1)));
+
+    showSlide(slideIndex);
+  });
+});
+</script>
+</body>
+</html>
