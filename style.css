@@ -105,8 +105,40 @@ nav#desktop-nav {
     background-color: transparent ; }
 
 
+/* Large tablets: 900px and below */
+@media(max-width:900px){
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 
+/* Small tablets / large phones: 768px and below */
+@media(max-width:768px){
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hamburger { display:flex; }
+  .nav-links { display:none; }
+  .nav-links.active { display:flex; }
+}
 
+/* Phones: 480px and below */
+@media(max-width:480px){
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media(max-width:768px){
+  .logo { font-size: 3rem; }
+  .nav-links a { font-size: large; }
+  .project-button { font-size: 0.9rem; }
+}
+@media(max-width:480px){
+  .logo { font-size: 2.5rem; }
+  .nav-links a { font-size: medium; }
+  .project-button { font-size: 0.8rem; }
+}
 
 @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-80%); } }
 
