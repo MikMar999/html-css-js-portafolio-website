@@ -8,7 +8,6 @@ body {
   background-size: cover;  
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed; /* optional: keeps it fixed when scrolling */
   min-height: 100vh;            /* ensures it stretches to full viewport height */
   margin: 0;                    /* removes default margin that can shift things */
   color: #e4ebdb;
@@ -41,6 +40,11 @@ nav#desktop-nav {
 .nav-links a:hover { color: greenyellow; }
 
 .logo { font-family: 'Aspekta', sans-serif; font-size: 4rem; color: #e4ebdb; }
+@media (max-width: 600px) {
+  .logo {
+    max-width: 120px;   /* smaller logo on phones */
+  }
+}
 
 #costume-design {
     margin-top: 6vh; /* 10% of viewport height, adjusts on screen size */
