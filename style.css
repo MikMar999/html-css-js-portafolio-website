@@ -5,12 +5,21 @@ html { scroll-behavior: smooth; }
 body {
   font-family: 'Aspekta', sans-serif;
   background-image: url("cueva con.png");
-  background-size: initial;
+  background-size: cover;  
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed; /* optional: keeps it fixed when scrolling */
+  min-height: 100vh;            /* ensures it stretches to full viewport height */
+  margin: 0;                    /* removes default margin that can shift things */
   color: #e4ebdb;
 }
 
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 /* NAVIGATION */
 nav#desktop-nav {
   border: 1px solid #dee6d5;
