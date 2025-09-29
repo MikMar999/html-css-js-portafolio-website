@@ -72,7 +72,12 @@ nav#desktop-nav {
   cursor: inherit;
   margin-bottom: 6px;
 }
-
+/* Optional: adjust for very tall mobile screens */
+@media(max-width:480px){
+  body {
+    background-position: top;    /* focus on top content */
+  }
+}
 /* Layout */
 main {
   position: relative; /* for vertical line */
