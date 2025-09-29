@@ -91,7 +91,24 @@ nav#desktop-nav {
 
 /* Layout */
 main {
-  padding-top: 60px; /* space for fixed nav */
+  padding-top: 40px; /* space for fixed nav */
+}
+
+.vertical-line.left { 
+  left: 0.5%; 
+}
+.vertical-line.right { right: 0.5%; }
+
+.corner-img {    
+  position: absolute;
+  top: 20%;      /* relative to parent height */
+  left: 12%;     /* relative to parent width */
+  width: clamp(70px, 10vw, 150px);   /* scales between 100px and 150px */
+  height: auto;  /* maintains aspect ratio */
+  object-fit: contain;
+  z-index: 101;
+  object-fit: contain; /* keeps ratio if not exact */
+  z-index: 101; /* make sure it sits above background but below nav if needed */
 }
 
 /* Contact image section */
@@ -116,7 +133,7 @@ main {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, calc(-50% - 15px));
   width: 80%;
   max-width: 400px;
   text-align: center;
@@ -199,7 +216,27 @@ main {
     width: 95%;
     top: 45%;
   }
+/* Tablet adjustments */
+@media (max-width: 768px) {
+  .corner-img {
+    width: 120px;
+    height: 120px;
+    top: -120px;
+    left: 12px;
+  }
+}
 
+/* Phone adjustments */
+@media (max-width: 480px) {
+  .corner-img {
+    width: 100px;
+    height: 100px;
+    top: -100px;
+    left: 8px;
+  }
+}
+
+}
   .button-container {
     padding: 12px;
   }
@@ -208,7 +245,7 @@ main {
   .linkedin-btn {
     font-size: 0.95rem;
   }
-}
+
 </style>
 </head>
 <body>
@@ -227,8 +264,12 @@ main {
   </ul>
 </nav>
 
+
 <main>
-  <!-- Contact Image -->
+  <!-- Responsive image that scrolls with content -->
+  <img src="Untitleddesign.png" alt="Top Left Logo" class="corner-img">
+
+  <!-- Contact Image Section -->
   <section class="contact-image">
     <img src="littledrawings.jpg" alt="Mikaela Martinez" />
 
@@ -242,6 +283,8 @@ main {
     </div>
   </section>
 </main>
+<div class="vertical-line left"></div>
+<div class="vertical-line right"></div>
 
 <script>
 // Hamburger toggle
@@ -251,6 +294,7 @@ const navLinks = document.getElementById('nav-links');
 hamburger.addEventListener('click', () => {
   navLinks.classList.toggle('active');
 });
+
 </script>
 
 </body>
