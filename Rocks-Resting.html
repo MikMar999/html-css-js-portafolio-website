@@ -180,7 +180,7 @@ main::before {
   cursor: pointer;
   user-select: none;
   z-index: 2;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.2); opacity: 50;
   border-radius: 50%;
   transition: background 0.3s, color 0.3s;
 }
@@ -223,6 +223,54 @@ main::before {
 .vertical-line.left { left: 0.5%; position: fixed; top: 0; bottom: 0; width: 1px; background: #e4ebdb; }
 .vertical-line.right { right: 0.5%; position: fixed; top: 0; bottom: 0; width: 1px; background: #e4ebdb; }
 
+/* Hamburger */
+.hamburger {
+  display: none; /* hide on desktop */
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25px;
+  height: 18px;
+  cursor: pointer;
+  z-index: 200;
+}
+.hamburger span {
+  display: block;
+  height: 3px;
+  background: #e4ebdb; /* your color */
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Nav links responsive */
+@media (max-width: 900px) {
+  .hamburger { display: flex; }
+
+  .nav-links {
+    display: none; /* hide by default */
+    flex-direction: column;
+    position: absolute;
+    top: 60px; /* adjust to your nav height */
+    right: 0;
+    background: rgba(97, 96, 96, 0.85);
+    width: 200px;
+    padding: 1rem;
+    border-radius: 5px;
+    z-index: 150;
+  }
+  .nav-links.open {
+    display: flex; /* show when hamburger is clicked */
+  }
+}
+
 /* Responsive */
 @media screen and (max-width: 900px) {
   .project-container { flex-direction: column-reverse; gap: 20px; }
@@ -234,6 +282,12 @@ main::before {
 <body>
 <nav id="desktop-nav">
   <div class="logo">Costume Design</div>
+
+  <div class="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About</a></li>
@@ -307,47 +361,56 @@ main::before {
 <div class="vertical-line right"></div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const projects = document.querySelectorAll(".project-container");
-
-  projects.forEach(project => {
-    let slideIndex = 1;
-    const slides = project.querySelectorAll(".slides");
-    const dots = project.querySelectorAll(".dot");
-    const captions = project.querySelectorAll(".project-text em");
-    const descriptions = project.querySelectorAll(".project-text li");
-
-    function showSlide(n) {
-      if (n > slides.length) slideIndex = 1;
-      if (n < 1) slideIndex = slides.length;
-
-      slides.forEach(slide => slide.style.display = "none");
-      slides[slideIndex - 1].style.display = "block";
-
-      dots.forEach(dot => dot.classList.remove("active-dot"));
-      if (dots[slideIndex - 1]) dots[slideIndex - 1].classList.add("active-dot");
-
-      captions.forEach(c => c.classList.remove("active-caption"));
-      if (captions[slideIndex - 1]) captions[slideIndex - 1].classList.add("active-caption");
-
-      descriptions.forEach(desc => desc.classList.remove("active-description"));
-      if (descriptions[slideIndex - 1]) descriptions[slideIndex - 1].classList.add("active-description");
-    }
-
-    function plusSlides(n) { showSlide(slideIndex += n); }
-    function currentSlide(n) { showSlide(slideIndex = n); }
-
-    const prev = project.querySelector(".prev");
-    const next = project.querySelector(".next");
-    if (prev) prev.addEventListener("click", () => plusSlides(-1));
-    if (next) next.addEventListener("click", () => plusSlides(1));
-
-    dots.forEach((dot, i) => dot.addEventListener("click", () => currentSlide(i + 1)));
-    captions.forEach((c, i) => c.addEventListener("click", () => currentSlide(i + 1)));
-
-    showSlide(slideIndex);
+  document.addEventListener("DOMContentLoaded", function () {
+    const projects = document.querySelectorAll(".project-container");
+  
+    projects.forEach(project => {
+      let slideIndex = 1;
+      const slides = project.querySelectorAll(".slides");
+      const dots = project.querySelectorAll(".dot");
+      const captions = project.querySelectorAll(".project-text em");
+      const descriptions = project.querySelectorAll(".project-text li");
+  
+      function showSlide(n) {
+        if (n > slides.length) slideIndex = 1;
+        if (n < 1) slideIndex = slides.length;
+  
+        slides.forEach(slide => slide.style.display = "none");
+        slides[slideIndex - 1].style.display = "block";
+  
+        dots.forEach(dot => dot.classList.remove("active-dot"));
+        if (dots[slideIndex - 1]) dots[slideIndex - 1].classList.add("active-dot");
+  
+        captions.forEach(c => c.classList.remove("active-caption"));
+        if (captions[slideIndex - 1]) captions[slideIndex - 1].classList.add("active-caption");
+  
+        descriptions.forEach(desc => desc.classList.remove("active-description"));
+        if (descriptions[slideIndex - 1]) descriptions[slideIndex - 1].classList.add("active-description");
+      }
+  
+      function plusSlides(n) { showSlide(slideIndex += n); }
+      function currentSlide(n) { showSlide(slideIndex = n); }
+  
+      const prev = project.querySelector(".prev");
+      const next = project.querySelector(".next");
+      if (prev) prev.addEventListener("click", () => plusSlides(-1));
+      if (next) next.addEventListener("click", () => plusSlides(1));
+  
+      dots.forEach((dot, i) => dot.addEventListener("click", () => currentSlide(i + 1)));
+      captions.forEach((c, i) => c.addEventListener("click", () => currentSlide(i + 1)));
+  
+      showSlide(slideIndex);
+    });
+  
+    // Hamburger menu JS (moved outside project loop)
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+  
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');   
+      hamburger.classList.toggle('active'); 
+    });
   });
-});
-</script>
+  </script>
 </body>
 </html>
