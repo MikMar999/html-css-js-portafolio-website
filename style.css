@@ -2,23 +2,41 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
+/* ---------------- RESET ---------------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+/* BODY */
 body {
   font-family: 'Aspekta', sans-serif;
-  background-image: url("cueva con.png");
-  background-size: cover;  
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 100vh;            /* ensures it stretches to full viewport height */
-  margin: 0;                    /* removes default margin that can shift things */
   color: #e4ebdb;
-}
-
-
-html, body {
-  height: 100%;
+  min-height: 100vh;   /* page expands with content */
   margin: 0;
-  padding: 0;
 }
+
+/* BACKGROUND IMAGE */
+body {
+  font-family: 'Aspekta', sans-serif;
+  color: #e4ebdb;
+  min-height: 100vh;
+  margin: 0;
+
+  /* Background image setup */
+  background-image: url("cueva con.png");
+  background-size: cover;         /* fills screen while keeping proportions */
+  background-position: center;    /* centers the image */
+  background-repeat: no-repeat;   /* no tiling */
+  background-attachment: fixed;   /* optional: parallax effect on desktop */
+}
+
+/* Optional: make background scroll with content on mobile */
+@media (max-width: 768px) {
+  .background {
+    position: absolute;
+  }
+}
+
+
 /* NAVIGATION */
 nav#desktop-nav {
   border: 1px solid #dee6d5;
@@ -39,10 +57,25 @@ nav#desktop-nav {
     transition: all 300ms ease; }
 .nav-links a:hover { color: greenyellow; }
 
-.logo { font-family: 'Aspekta', sans-serif; font-size: 4rem; color: #e4ebdb; }
+.logo {
+  font-size: 3rem; /* default desktop size */
+  line-height: 1;  /* keeps it from overflowing */
+}
+
+/* Responsive logo + nav */
 @media (max-width: 600px) {
+  nav#desktop-nav {
+    height: auto;            /* let it expand naturally */
+    padding: 0.5rem 1rem;    /* adjust padding */
+  }
+
   .logo {
-    max-width: 120px;   /* smaller logo on phones */
+    font-size: 1.8rem;       /* smaller logo for phones */
+    margin-bottom: 0;        /* remove extra spacing */
+  }
+
+  .nav-links {
+    font-size: 1.2rem;       /* also scale nav links */
   }
 }
 
@@ -142,16 +175,6 @@ nav#desktop-nav {
   }
 }
 
-@media(max-width:768px){
-  .logo { font-size: 3rem; }
-  .nav-links a { font-size: large; }
-  .project-button { font-size: 0.9rem; }
-}
-@media(max-width:480px){
-  .logo { font-size: 2.5rem; }
-  .nav-links a { font-size: medium; }
-  .project-button { font-size: 0.8rem; }
-}
 
 @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-80%); } }
 
