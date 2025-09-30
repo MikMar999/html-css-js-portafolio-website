@@ -67,13 +67,26 @@ nav#desktop-nav {
 .nav-links a:hover { color: greenyellow; }
 
 .logo {
-  font-family: 'Aspekta', sans-serif;
-  font-size: 3rem;
-  color: #e4ebdb;
-  cursor: inherit;
-  margin-bottom: 6px;
+  font-size: 3rem; /* default desktop size */
+  line-height: 1;  /* keeps it from overflowing */
 }
 
+/* Responsive logo + nav */
+@media (max-width: 600px) {
+  nav#desktop-nav {
+    height: auto;            /* let it expand naturally */
+    padding: 0.5rem 1rem;    /* adjust padding */
+  }
+
+  .logo {
+    font-size: 1.8rem;       /* smaller logo for phones */
+    margin-bottom: 0;        /* remove extra spacing */
+  }
+
+  .nav-links {
+    font-size: 1.2rem;       /* also scale nav links */
+  }
+}
 /* Layout */
 main {
   position: relative; /* for vertical line */
