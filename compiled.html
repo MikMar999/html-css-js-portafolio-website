@@ -28,13 +28,19 @@ p {
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Aspekta', sans-serif;
-  background: url('cueva con.png') no-repeat center center fixed;
-  background-size: cover;
   color: #e4ebdb;
   overflow-x:visible
 }
 
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* makes the video fill the screen without distortion */
+  z-index: -1;         /* keeps it behind the content */
+}
 /* Navigation */
 nav#desktop-nav {
   display: flex;
@@ -292,16 +298,23 @@ nav#desktop-nav {
 </style>
 </head>
 <body>
-<nav id="desktop-nav">
-  <div class="logo"></div>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="experience.html">Experience</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-</nav>
-<main>
-    <div class="logo">UNDER CONSTRUCTION! WILL BE OUT SOON! </div>
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="glowwebsite.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <nav id="desktop-nav">
+    <div class="logo"></div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="logo">UNDER CONSTRUCTION! WILL BE OUT SOON!</div>
+  </main>
 </body>
 </html>
